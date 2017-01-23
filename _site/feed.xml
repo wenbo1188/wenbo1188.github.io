@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Wen</title>
+    <description>Wen的博客 码出新世界</description>
+    <link>/</link>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 23 Jan 2017 20:25:03 +0800</pubDate>
+    <lastBuildDate>Mon, 23 Jan 2017 20:25:03 +0800</lastBuildDate>
+    <generator>Jekyll v3.1.2</generator>
+    
+      <item>
+        <title>集体智慧编程-chapter2学习笔记</title>
+        <description>&lt;p&gt;#提供推荐
+##协作型过滤
+ * 协作型过滤算法通常对一大群人进行搜索, 并从中找出与我们品味相近的一小群人.
+ * 相似度评价值:&lt;strong&gt;欧几里德距离__和__皮尔逊相关度&lt;/strong&gt;
+  + 欧几里德距离评价:以经过人们一致评价的物品为坐标轴, 然后将与参与评价的人绘制到图上, 并考察他们彼此间的距离远近.
+  + 代码示例: python		
+		```python
+	from math import sqrt&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# 返回一个有关person1与person2的基于距离的相似度评价
+def sim_distance(prefs, person1, person2):
+	# 得到shared_items的列表
+	si = {}
+	for item in prefs[person1]:
+		if item in prefs[person2]:
+			si[item] = 1
+	
+	# 如果两者没有共同之处, 则返回0
+	if len(si) == 0:
+		return 0
+
+	# 计算所有差值的平方和
+	sum_of_squares = sum([pow(prefs[person1][item] - prefs[person2][item], 2) for item in prefs[person1] if item in prefs[person2]])
+	
+	# 结果加1防止除零, 并取其倒数
+	return 1/(1 + sqrt(sum_of_squares)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Mon, 23 Jan 2017 00:00:00 +0800</pubDate>
+        <link>/2017/01/23/programming-collective-intelligence-chapter2/</link>
+        <guid isPermaLink="true">/2017/01/23/programming-collective-intelligence-chapter2/</guid>
+        
+        
+        <category>Programming</category>
+        
+        <category>Collective</category>
+        
+        <category>Intelligence</category>
+        
+      </item>
+    
+      <item>
+        <title>C C++ Read Write</title>
+        <description>&lt;hr /&gt;
+&lt;p&gt;layout: post	
+title: “关于C/C++输入输出的汇总复习”	
+date: 2016-04-27	
+categories: C/C++	
+—-&lt;/p&gt;
+
+&lt;h1 id=&quot;cc&quot;&gt;C/C++输入输出&lt;/h1&gt;
+&lt;hr /&gt;
+&lt;p&gt;## C++输入输出     &lt;br /&gt;
+* cin:   &lt;br /&gt;
+把一个单词作为读入单元.  &lt;br /&gt;
+* getline()和get():
+这两个函数都是读入一行输入,直到换行符.然而getline()将丢弃换行符,而get()将换行符保留在输入序列中.&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 27 Apr 2016 00:00:00 +0800</pubDate>
+        <link>/2016/04/27/c-c++-read-write/</link>
+        <guid isPermaLink="true">/2016/04/27/c-c++-read-write/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>现代密码学(网易公开课)分享</title>
+        <description>&lt;h1 id=&quot;section&quot;&gt;现代密码学(网易公开课)分享&lt;/h1&gt;
+&lt;hr /&gt;
+&lt;p&gt;这学期的密码学课上实在听的是云里雾里, 想在网易公开课上找找视频补习一下, 找到了这个&lt;a href=&quot;http://open.163.com/special/Khan/moderncryptography.html&quot;&gt;现代密码学&lt;/a&gt;的视频, 感觉讲的很有新意. 虽然并没有很深入讲解内部的原理, 但是通过日常的例子就把加密和解密的原理讲的很透彻, 尤其是通过颜料混合以及光线混合的例子就把RSA的基本原理讲的很清楚, 真的是感觉眼前一亮. 不错的视频, 点赞.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 26 Apr 2016 00:00:00 +0800</pubDate>
+        <link>/2016/04/26/cryptography/</link>
+        <guid isPermaLink="true">/2016/04/26/cryptography/</guid>
+        
+        
+        <category>share</category>
+        
+      </item>
+    
+      <item>
+        <title>关于jekyll安装</title>
+        <description>&lt;h1 id=&quot;jekyll&quot;&gt;jekyll安装&lt;/h1&gt;
+&lt;hr /&gt;
+&lt;p&gt;前些天刚刚把jekyll在我的电脑上安装成功了,安装之路极其艰辛,所以把整个安装过程记录一下.
+主要借鉴了&lt;a href=&quot;http://www.zhanxin.info/jekyll/2013-08-07-jekyll-doc-installation.html&quot;&gt;一篇博文&lt;/a&gt;,不过在我自己电脑上实践的过程中仍然遇到了很令人头痛的问题,不知道是因为版本更新的问题还是平台不同的原因.总之我的电脑是ubuntu系统,系统版本14.04,内核版本4.4.4&lt;/p&gt;
+
+&lt;h2 id=&quot;ruby&quot;&gt;一.安装Ruby&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;详细的安装文档，可以查看 Ruby 官方的安装介绍.我在这里列出几种简单的方法，便于快速参考.&lt;/li&gt;
+  &lt;li&gt;使用 RVM 安装.关于 RVM 安装的详细方法在&lt;a href=&quot;https://rvm.io/rvm/install&quot;&gt;Installation page&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\c&lt;/span&gt;url -L https://get.rvm.io | bash   
+&lt;span class=&quot;c&quot;&gt;##原文处这里用的是1.9.2版本但是在我的电脑上要求是版本&amp;gt;=2.0.0     &lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;rvm install 2.0.0     
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;rvm use 2.0.0     
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Linux 下的安装方法.在终端上执行：&lt;/li&gt;
+  &lt;li&gt;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;sudo apt-get install ruby2.0     
+&lt;span class=&quot;c&quot;&gt;##检查是否安装成功     &lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;ruby -v     
+&lt;span class=&quot;c&quot;&gt;##返回如下结果表示安装成功(注意这里要求必须ruby版本&amp;gt;=2.0否则后面会出错)    &lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;ruby 2.1.2p95 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2014-05-08 revision 45877&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;x86_64-linux]     
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;rubygems&quot;&gt;二.安装RubyGems&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;ubuntu下应该系统自带RubyGems, 否则下载安装包,安装到本地后检查更新&lt;/li&gt;
+  &lt;li&gt;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo gem update --system   
+$ gem -v     
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;jekyll-1&quot;&gt;三.安装Jekyll&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;最好的安装方法应该是通过 RubyGems 来安装，在终端输入：&lt;/li&gt;
+  &lt;li&gt;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo  gem install jekyll      
+##检查版本号(我的是3.1.2)
+$ jekyll -v       
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;这里可能需要修改gem的源,运行:&lt;/li&gt;
+  &lt;li&gt;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ gem source -r https://rubygems.org/       
+$ gem source -a http://ruby.taobao.org/ or https://ruby.taobao.org/          
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;至此,jekyll基本安装成功.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 08 Apr 2016 00:00:00 +0800</pubDate>
+        <link>/2016/04/08/jekyll-setup/</link>
+        <guid isPermaLink="true">/2016/04/08/jekyll-setup/</guid>
+        
+        
+        <category>jekyll</category>
+        
+      </item>
+    
+      <item>
+        <title>我的第一篇博客</title>
+        <description>&lt;h2 id=&quot;section&quot;&gt;我的第一篇博客&lt;/h2&gt;
+&lt;hr /&gt;
+&lt;p&gt;My first blog with jekyll&lt;/p&gt;
+
+&lt;p&gt;2016-04-07&lt;/p&gt;
+</description>
+        <pubDate>Thu, 07 Apr 2016 00:00:00 +0800</pubDate>
+        <link>/2016/04/07/my-first-blog/</link>
+        <guid isPermaLink="true">/2016/04/07/my-first-blog/</guid>
+        
+        
+        <category>life</category>
+        
+      </item>
+    
+  </channel>
+</rss>
