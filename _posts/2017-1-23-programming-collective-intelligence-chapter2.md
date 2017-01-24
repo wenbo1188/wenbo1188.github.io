@@ -2,7 +2,7 @@
 layout: post
 title: 	"集体智慧编程-chapter2学习笔记"
 date: 2017-01-23
-categories: Programming Collective Intelligence
+categories: ProgrammingCollectiveIntelligence
 excerpt: 集体智慧编程学习笔记
 ---
 
