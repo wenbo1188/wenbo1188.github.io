@@ -1,9 +1,9 @@
-----
+---
 layout: post
 title: "关于C/C++输入输出的汇总复习"
 date: 2016-04-27
 categories: C/C++
-----
+---
 
 # C/C++输入输出
 ## C++输入输出       
