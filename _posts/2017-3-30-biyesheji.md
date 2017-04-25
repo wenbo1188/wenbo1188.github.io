@@ -26,9 +26,9 @@ categories: share
 
 ----------- 
 ### 基本框架结构 ###
-![A logical Architecture Example of IoMDC](https://github.com/wenbo1188/wenbo1188.github.io/tree/master/static/img/1.png)
-![The platform of IoMDC system](https://github.com/wenbo1188/wenbo1188.github.io/tree/master/static/img/2.png)
-![The platform of IoMDC system](https://github.com/wenbo1188/wenbo1188.github.io/tree/master/static/img/3.png)
+![A logical Architecture Example of IoMDC](https://raw.githubusercontent.com/wenbo1188/wenbo1188.github.io/master/static/img/1.png)
+![The platform of IoMDC system](https://raw.githubusercontent.com/wenbo1188/wenbo1188.github.io/master/static/img/2.png)
+![The platform of IoMDC system](https://raw.githubusercontent.com/wenbo1188/wenbo1188.github.io/master/static/img/3.png)
 
 ----------- 
 ### 准备工作 ### 
