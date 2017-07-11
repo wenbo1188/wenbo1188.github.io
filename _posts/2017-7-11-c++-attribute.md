@@ -1,6 +1,6 @@
 ---
 layout: post
-title: C++ \_\_attribute\_\_
+title: C++ __attribute__
 date: 2017-07-11
 categories: C/C++
 ---  
