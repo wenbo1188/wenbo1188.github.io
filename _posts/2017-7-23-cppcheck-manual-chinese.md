@@ -65,7 +65,7 @@ cppcheck src/a src/b
 ```
 cppcheck -isrc/c src
 ```
-这种方法目前无法和--project选项同时工作并且仅当提供一个输入文件夹时才有效。忽略多个目录需要多次使用-i选项，以下的命令会同时忽略src/b 和src/c目录:  
+这种方法目前无法和 __\-\-project__ 选项同时工作并且仅当提供一个输入文件夹时才有效。忽略多个目录需要多次使用-i选项，以下的命令会同时忽略src/b 和src/c目录:  
 ```
 cppcheck -isrc/b -isrc/c
 ```
@@ -80,7 +80,7 @@ portability     可移植性警告。64位可移植性。代码可能在不同�
 information     配置问题。要求仅在配置过程中启用。
 ```
 ### 启用messages ###
-默认情况下仅显示error信息，通过--enable命令可以启用更多检查。  
+默认情况下仅显示error信息，通过 __\-\-enable__ 命令可以启用更多检查。  
 ```
 # 启用warning
 cppcheck --enable=warning file.c
@@ -104,4 +104,139 @@ cppcheck --enable=unusedFunction file.c
 # 启用所有的message
 cppcheck --enable=all
 ```
-请注意 --enable=unusedFunction 应仅用于整个程序检查过的情况。因此，--enable=all也应仅用于整个程序检查过的情况，因为未被使用函数检查会对未被调用的函数给出警告，如果函数调用未被检测到则会造成干扰。
+请注意 __\-\-enable=unusedFunction__ 应仅用于整个程序检查过的情况。因此 __\-\-enable=all__ 也应仅用于整个程序检查过的情况，因为未被使用函数检查会对未被调用的函数给出警告，如果函数调用未被检测到则会造成干扰。
+
+### 将结果保存到文件 ###
+很多时候你希望将结果保存到文件里，你可以使用shell命令将错误信息重定向到指定文件。
+```
+cppcheck file1.c 2> err.txt
+```
+
+### 多线程检查 ###
+参数-j用来确定你想要的线程数，比如说，你想用4个线程来检查文件：
+```
+cppcheck -j 4 path
+```
+请注意这会取消掉未调用函数检查。
+
+### 平台 ###
+你必须使用匹配你的目标的平台设置。  
+默认情况下，如果你的代码是在本地编译和执行的话，Cppcheck会使用本地的平台设置。  
+Cppcheck有着内置的针对unix和windows平台的设置。你可以方便地通过 __\-\-platform__ 命令行参数表示来使用这些。  
+你也可以在xml文件中创建你自己的平台设置，例子如下：  
+```
+<?xml version="1"?>
+<platform>
+ <char_bit>8</char_bit>
+ <default-sign>signed</default-sign>
+ <sizeof>
+ <short>2</short>
+ <int>4</int>
+ <long>4</long>
+ <long-long>8</long-long>
+ <float>4</float>
+ <double>8</double>
+ <long-double>12</long-double>
+ <pointer>4</pointer>
+ <size_t>4</size_t>
+ <wchar_t>2</wchar_t>
+ </sizeof>
+</platform>
+```
+
+## 第三章 工程 ##
+当你使用CMake或Visual Studio时，可以使用 __\-\-project__ 来分析你的工程。  
+这会给你一个快速且简单的结果，你并不需要做太多的配置，但很难讲这是否能给你最好的结果。因此建议同时尝试不使用 __\-\-project__ 来分析你的源代码，看看那种方式更好。  
+
+### CMake ###
+Cppcheck能够理解编译数据库，你可以通过CMake来产生这些数据库。  
+例如：  
+```
+$ cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+```
+将会在当前目录内产生compile_commands.json文件  
+现在运行Cppcheck:  
+```
+$ cppcheck --project=compile_commands.json
+```
+
+### Visual Studio ###
+你可以在单独的工程文件(\*.vcxproj)上或者整个解决方法(\*.sln)上运行Cppcheck
+```
+# 在整个解决方法上运行cppcheck
+$ cppcheck --project=foobar.sln
+
+# 在单独的工程上运行cppcheck
+$ cppcheck --project=foobar.vcxproj
+```
+请注意，有一个Visual Studio插件允许你在Visual Studio内部调用cppcheck。  
+
+## 第四章 预处理设置 ##
+如果你使用 __\-\-project__ 选项，Cppcheck会使用工程文件中的预处理设置。否则你需要配置include以及define的路径。  
+
+### Defines ###
+以下是一个拥有两种配置的文件(有A定义和无A定义)：  
+```
+#ifdef A
+    x = y;
+#else
+    x = z;
+#endif
+```
+默认情况下，Cppcheck会检查所有预处理配置(除了那些其中包含#error的)，因此以上的代码会分析在两种情况下的结果。  
+你可以使用 -D 来改变这一点。当你使用 -D 时，cppcheck默认只会检查指定的配置而不检查其他的。 编译器就是这样工作的。但是你可以使用 __\-\-force__ 或者 __\-\-max\-configs__ 来忽略配置的数量。  
+```
+# 检查所有的配置
+cppcheck file.c
+
+# 仅检查配置A
+cppcheck -DA file.c
+
+# 当宏A被定义时，检查所有配置
+cppcheck -DA --force file.c
+```
+-U是可能另外一个有用的标识，它取消一个符号的定义，例如：  
+```
+cppcheck -UX file.c
+```
+这意味着X被取消了定义。Cppcheck将不会检查X被定义情况下的代码。  
+
+### include 路径 ###
+想要添加一个include路径，使用-I，后面接路径。  
+Cppcheck的预处理器处理include的方式与其他预处理器基本相同。然而，当其他预处理器没找到一个头文件时会停止工作，而cppcheck仅会打印信息并且继续对代码进行分析。  
+这样做的目的在于，cppcheck应该具有在没有看见全部代码的情况下工作的能力。事实上，我们并不推荐把所有的include路径写完全。虽然用cppcheck检查一个类的声明和成员函数的实现是有用的，但是将标准库的头文件传递给cppcheck是强烈不建议的，因为它可能造成更糟糕的结果或者是更长的检查时间。在这些情况下，.cfg文件(见下文)是更好的提供信息的方式。  
+
+## 第五章 XML输出 ##
+cppcheck可以将输出保存成XML格式。有一种旧版本的XML格式(version 1)和一种新版本的(version 2)。如果可能的话，请尽量使用新版本。  
+保留老版本仅仅是为了保证向上兼容性。这一点不会修改，但它可能在将来被移除。使用 __\-\-xml__ 来启用这种格式。  
+新版本修复了一些旧版本格式的问题。新格式将会随着未来版本的cppcheck同步更新，加入一些新的属性和元素。检查文件并输出错误到新的XML格式的命令如下：  
+```
+cppcheck --xml-version=2 file1.cpp
+```
+这是一个version 2报告样例：  
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+ <cppcheck version="1.66">
+ <errors>
+ <error id="someError" severity="error" msg="short error text"
+ verbose="long error text" inconclusive="true" cwe="312">
+ <location file0="file.c" file="file.h" line="1"/>
+ </error>
+ </errors>
+</results>
+```
+
+### <error\> 元素 ###
+每个错误都跟随一个<error>元素报告出来。属性：  
+```
+id              错误的id，有效的符号
+severity        error, warning, style, performance 或者 information
+msg             短格式的错误信息
+verbose         长格式的错误信息
+inconclusive    仅当信息是不确定的时候这个属性才被使用
+cwe             信息的CWE ID，仅当信息的CWE ID已知时使用
+```
+
+### <location\> 元素
+
