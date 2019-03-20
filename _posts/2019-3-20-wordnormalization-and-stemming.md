@@ -39,14 +39,14 @@ step 1a:
 sses -> ss|caresses -> caress  
 ies -> i|ponies -> poni
 ss -> ss|caress -> caress
-s -> \varnothing|cats -> cat
+s -> |cats -> cat
 
 step 1b:  
 
 原则|例子  
 -|-
-(\*v\*)ing -> \varnothing|walking -> walk;sing ->sing
-(\*v\*)ed -> \varnothing|plastered -> plaster
+(\*v\*)ing -> |walking -> walk;sing ->sing
+(\*v\*)ed -> |plastered -> plaster
 
 其中v表示元音
 
@@ -62,6 +62,6 @@ step 3(长词根):
 
 原则|例子  
 -|-
-al -> \varnothing|revival -> reviv
-able -> \varnothing|adjustable -> adjust
-ate -> \varnothing|activate -> activ
+al -> |revival -> reviv
+able -> |adjustable -> adjust
+ate -> |activate -> activ
