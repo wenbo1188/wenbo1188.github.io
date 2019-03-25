@@ -1,6 +1,6 @@
 ---
 layout: post
-title: NLP学习之词语正规化和词根
+title: NLP学习(3)之词语正规化和词根
 date: 2019-03-20
 categories: NLP
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: NLP学习之语言模型
+title: NLP学习(6)之语言模型
 date: 2019-03-20
 categories: NLP
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: NLP学习之Min-Edit-Distance
+title: NLP学习(5)之Min-Edit-Distance
 date: 2019-03-20
 categories: NLP
 ---

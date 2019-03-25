@@ -1,6 +1,6 @@
 ---
 layout: post
-title: NLP学习之词语划分
+title: NLP学习(2)之词语划分
 date: 2019-03-20
 categories: NLP
 ---
