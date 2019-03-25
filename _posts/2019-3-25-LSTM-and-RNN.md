@@ -5,6 +5,8 @@ date: 2019-03-25
 categories: NLP
 ---
 
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
 # LSTM与RNN #  
 
 ## RNN ##  
@@ -46,8 +48,27 @@ sigmoid层输出0~1之间的值，表示信息通过率，0表示无信息通过
 #### 一步一步看LSTM ####  
 
 1. 首先，LSTM需要决定哪些信息要被丢弃，这个过程通过一个sigmoid层(也叫遗忘层)来实现。遗忘层为每个$C_{t-1}$输入$h_{t-1}$和$x_t$并输出一个0~1之间的数值，1表示完全保留，0表示完全遗忘。让我们回到语言模型中基于前面单词预测后面单词的例子，在这样的问题中，cell状态可能需要将当前主语的性别保存下来，以保证后面的代词使用的正确性，而当我们遇到新主语时，要将旧主语的信息遗忘。  
-$$f_t = \sigma(W_f[h_{t-1}, x_t] + b_f)$$
+$$f_t = \sigma(W_f[h_{t-1}, x_t] + b_f)$$  
 2. 第二步我们要判断需要加入cell状态的新信息，新信息分为两部分：  
 
     - 一个sigmoid层，决定哪些值需要更新  
-    - 一个tanh层，创造新的可加入cell状态的备选值$\hat{C_t}$
+    - 一个tanh层，创造新的可加入cell状态的备选值$\hat{C_t}$  
+
+    $$i_t = \sigma(W_i[h_{t-1}, x_t] + b_i)$$  
+    $$\hat{C_t} = tanh(W_c[h_{t-1}, x_t] + b_c)$$  
+3. 我们将以上操作整合，将就状态$C_{t-1}$乘以$f_t$以遗忘一些信息，加上$i_t*\hat{C_t}$，也就是要更新的信息，($i_t$决定了我们要更新状态的权重占比)  
+$$C_t = f_t * C_{t-1} + i_t * \hat{C_t}$$  
+4. 最终我们决定要输出什么，输出取决于状态$C_t$但要经过过滤，首先通过sigmoid层来决定cell状态的哪些部分要输出，然后我们让$C_t$经过tanh层将值映射至$[-1, 1]$，然后乘以sigmoid的输出。  
+$$o_t = \sigma(W_o[h_{t-1}, x_t] + b_o)$$  
+$$h_t = o_t * tanh(C_t)$$  
+
+#### LSTM的变型 ####
+
+1. 一个流行的变型：加入peephole connections，意味着每个sigmoid门都能看到cell状态，也即：  
+$$f_t = \sigma(W_f[C_{t-1},h_{t-1},x_t]) + b_f$$  
+$$i_t = \sigma(W_i[C_{t-1},h_{t-1},x_t]) + b_i$$  
+$$o_t = \sigma(W_o[C_{t-1},h_{t-1},x_t]) + b_o$$  
+另外，也可以使sigmoid门对于cell状态部分可见，部分不可见。  
+2. 另外一个变型是同时决定哪些需要遗忘，那些要新增。  
+$$C_t = f_t * C_{t-1} + (1 - f_t) * \hat{C_t}$$  
+3. 一个比较大的变化的变型：GRU(Gated Recurrent Unit)
