@@ -5,6 +5,8 @@ date: 2019-03-28
 categories: NLP
 ---
 
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
 # 模型泛化和“0”的处理 #
 
 与其他机器学习方法一样，语言模型的训练也会有过拟合的问题。一种解决过拟合的方法：处理好数据中的“0”  
