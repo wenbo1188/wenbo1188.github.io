@@ -25,7 +25,7 @@ $$\Rightarrow$$ P("offer"|denied the) = 0
 
 # Add one smoothing #
 
-$$Add one smoothing \Rightarrow Laplace smoothing$$  
+Add one smoothing $$\Rightarrow$$ Laplace smoothing  
 假装我们对于每个单词的count都至少为1，即假设我们都至少见过一次，对每个情况的count都加1。  
 $$P_{MLE}(w_i|w_{i-1}) = \frac{C(w_{i-1},w_i)}{C(w_{i-1})}$$  
 $$P_{ADD-1}(w_i|w_{i-1}) = \frac{C(w_{i-1},w_i) + 1}{C(w_{i-1}) + V}$$  
@@ -96,8 +96,8 @@ Entropy: base pruning
 - "Stupid backoff"
 - $$f(x)=
 \begin{cases}
-0& \text{x=0}\\
-1& \text{x!=0}
+\frac{count(w^i_{i-k+1})}{count(w^{i-1}_{i-k+1})}& \text{count(w^i_{i-k+1}) > 0}\\
+0.4S(w_i|w^{i-1}_{i-k+2})& \text{otherwise}
 \end{cases}$$
 $$S(w_i) = \frac{count(w_i)}{N}$$
 
