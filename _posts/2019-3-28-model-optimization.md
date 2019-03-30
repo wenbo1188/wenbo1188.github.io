@@ -17,7 +17,7 @@ e.g.
 ... denied the reports.  
 ... denied the claims.  
 ... denied the requests.  
-$$\Rightarrow P("offer"|denied the) = 0$$  
+$$\Rightarrow$$ P("offer"|denied the) = 0
 测试集中：  
 ... denied the offer.  
 ... denied the loan.  
@@ -27,9 +27,9 @@ $$\Rightarrow P("offer"|denied the) = 0$$
 
 $$Add one smoothing \Rightarrow Laplace smoothing$$  
 假装我们对于每个单词的count都至少为1，即假设我们都至少见过一次，对每个情况的count都加1。  
-$$P_{MLE}(w_i|w_{i-1}) = \frac{C(w{i-1},w_i)}{C(w_{i-1})}$$  
-$$P_{ADD-1}(w_i|w_{i-1}) = \frac{C(w_{i-1},w_i) + 1}{C(w_{i-1} + V)}$$  
-注意分母要加V，因为对于每种组合$$(w_{i-1},w_x)$$都加了1，而$$w_x的个数为V$$
+$$P_{MLE}(w_i|w_{i-1}) = \frac{C(w_{i-1},w_i)}{C(w_{i-1})}$$  
+$$P_{ADD-1}(w_i|w_{i-1}) = \frac{C(w_{i-1},w_i) + 1}{C(w_{i-1}) + V}$$  
+注意分母要加V，因为对于每种组合$$(w_{i-1},w_x)$$都加了1，而$$w_x$$的个数为$$V$$
 
 # Maximum Likelihood Estimates(最大似然估计) #
 
@@ -60,7 +60,7 @@ $$\hat{P}(w_n|w_{n-2},w_{n-1}) = \lambda_1P(w_n|w_{n-2},w_{n-1}) + \lambda_2P(w_
 - 上下文条件参数：  
 $$\hat{P}(w_n|w_{n-2},w_{n-1}) = \lambda_1(w^{n-1}_{n-2})P(w_n|w_{n-2},w_{n-1}) + \lambda_2(w^{n-1}_{n-2})P(w_n|w_{n-1}) + \lambda_3(w^{n-1}_{n-2})P(w_n)$$  
 
-## 如何设置$$\lambda$$d的值 ##
+## 如何设置$$\lambda$$的值 ##
 
 - 使用预留的语料库(held-out corpus)  
 整体语料库被分为三部分：  
@@ -94,7 +94,11 @@ Entropy: base pruning
 # 大语料库中的smoothing #
 
 - "Stupid backoff"
-- $$S(w_i|w^{i-1}_{i-k+1}) = \begin{cases}0& \text{if count(w^i_{i-k+1}) > 0}1& \text{otherwise}\end{cases}$$
+- $$f(x)=
+\begin{cases}
+0& \text{x=0}\\
+1& \text{x!=0}
+\end{cases}$$
 $$S(w_i) = \frac{count(w_i)}{N}$$
 
 # N-gram smoothing总结 #
@@ -111,5 +115,5 @@ $$S(w_i) = \frac{count(w_i)}{N}$$
 
 用我们见过一次的事物的count，来帮助估计我们从未见过的  
 Notation:  
-$$N_e = Frequency of frequency c$$  
-$$PGT(things with zero frequency) = \frac{N_1}{N}, C^* = \frac{(C+1)N_{C+1}}{N_C}$$
+$$N_e$$ = Frequency of frequency $$c$$  
+PGT(things with zero frequency) = $$\frac{N_1}{N}, C^* = \frac{(C+1)N_{C+1}}{N_C}$$
