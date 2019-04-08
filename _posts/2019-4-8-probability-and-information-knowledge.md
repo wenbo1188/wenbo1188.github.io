@@ -38,7 +38,7 @@ $$P(x;\lambda) = \lambda e^{-\lambda x}, x \ge 0 = \lambda_{1_{x \ge 0}}e^{-\lam
 
 ### Laplace分布 ###
 
-一个联系紧密的概率分布是laplace分布，它允许我们在任意一点$$\mu$$出设置概率质量的峰值，$$Laplace(x;\mu, \gamma) = \frac{1}{2\gamma}e^{-\frac{|x-\mu|}{\gamma}}$$
+一个联系紧密的概率分布是laplace分布，它允许我们在任意一点$$\mu$$出设置概率质量的峰值，$$Laplace(x;\mu, \gamma) = \frac{1}{2\gamma}e^{-\frac{\mid x-\mu \mid}{\gamma}}$$
 
 ## Dirac分布和经验分布 ##
 
