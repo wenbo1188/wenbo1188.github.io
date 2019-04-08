@@ -34,7 +34,10 @@ $$N(x;\mu,\Sigma) = \sqrt \frac{1}{(2\pi)^ndet(\Sigma)}e^{-\frac{1}{2}(x-\mu)^T\
 
 ### 指数分布 ###
 
-$$P(x;\lambda) = \lambda e^{-\lambda x}, x \ge 0 = \lambda_{1_{x \ge 0}}e^{-\lambda x}, 其中指示函数1_{x \ge 0}来使得当x取负值时的概率为0$$  
+$$P(x;\lambda) = \lambda e^{-\lambda x}, x \ge 0 = \lambda_{1_{x \ge 0}}e^{-\lambda x}, 其中指示函数1_{x \ge 0}来使得当x取负值时的概率为0$$
+
+### Laplace分布 ###
+
 一个联系紧密的概率分布是laplace分布，它允许我们在任意一点$$\mu$$出设置概率质量的峰值，$$Laplace(x;\mu, \gamma) = \frac{1}{2\gamma}e^{-\frac{|x-\mu|}{\gamma}}$$
 
 ## Dirac分布和经验分布 ##
