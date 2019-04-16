@@ -34,8 +34,8 @@ $$\frac{\partial f(x)}{\partial x}\mid_u = u\cdot v$$
 - 多维函数：在多维情况下，  
 $$v = ∇_xf(x) \Rightarrow \frac{\partial f(x)}{\partial x}\mid_u = u^T∇_xf(x)$$  
 为了最小化$$f$$，希望找到使$$f$$下降的最快的方向，  
-$$\Delta f = \frac{\partial f(x)}{\partial x}\mid_u\cdot \Delta \Leftrightarrow min_{u,u^Tu=1}u^T∇_xf(x)$$  
-$$= min_{u,u^Tu=1}\parallel u \parallel_2\parallel ∇_xf(x) \parallel_2\cos(\theta) \Leftrightarrow min_u \cos(\theta)$$  
+$$\Delta f = \frac{\partial f(x)}{\partial x}\mid_u\cdot \Delta \Leftrightarrow \min \limits_{u,u^Tu=1}u^T∇_xf(x)$$  
+$$= \min \limits_{u,u^Tu=1}\parallel u \parallel_2\parallel ∇_xf(x) \parallel_2\cos(\theta) \Leftrightarrow \min \limits_u \cos(\theta)$$  
 因此在u与梯度相反时，取得最小，称为梯度下降。梯度下降建议新的点为：  
 $$\hat{x} = x - \epsilon ∇_xf(x)$$，其中$$\epsilon$$为学习率。
 
